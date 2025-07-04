@@ -108,3 +108,13 @@ def simple_model(input_data, split_data=True, scale_data=False, print_report=Fal
         print('Read more about the classification report: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html and https://www.nb-data.com/p/breaking-down-the-classification')
     
     return None
+
+def impute_missing_values(data, strategy='mean'):
+    if strategy == 'mean':
+        return data.fillna(data.mean(numeric_only=True))
+    elif strategy == 'median':
+        return data.fillna(data.median(numeric_only=True))
+    elif strategy == 'mode':
+        return data.fillna(data.mode().iloc[0])
+    else:
+        raise ValueError("Invalid strategy. Choose from 'mean', 'median', or 'mode'.")
